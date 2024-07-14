@@ -221,6 +221,7 @@ df = pd.read_sql(sql, conn)
 ```
 
 ## 表连结
+
 ```python
 # 内联结
 sql = "SELECT \
@@ -242,4 +243,30 @@ sql = "SELECT \
   products.name AS favorite \
   FROM users \
   RIGHT JOIN products ON users.fav = products.id"
+```
+
+### like 通配符
+
+```sql
+select prod_id, prod_name
+from products
+where prod_name like 'jet%';
+```
+
+搜索是区分*大小写的*  
+% 匹配 0、1、多个字符  
+_ 匹配一个字符，不能多也不能少
+
+### 日期格式
+
+**日期格式必须是 `yyyy-mm-dd`  
+
+如果要的是日期，使用Date()  
+
+```sql
+select cust_id, order_num
+from orders
+where Date(order_date) = '2005-09-01';
+where Date(order_date) between '2005-09-01' and '2005-09-30';
+where Year(order_date) = 2005 and Month(order_date) = 9;
 ```
